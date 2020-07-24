@@ -1,13 +1,14 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import addDays from 'date-fns/add_days';
-import addMonths from 'date-fns/add_months';
-import addWeeks from 'date-fns/add_weeks';
-import addYears from 'date-fns/add_years';
-import Fecha from 'fecha'; // TODO replace with date-fns/parse after v2 is released
-import format from 'date-fns/format';
-import isSameDay from 'date-fns/is_same_day';
-import isValid from 'date-fns/is_valid';
+import {
+  addDays,
+  addMonths,
+  addWeeks,
+  addYears,
+  isSameDay,
+  isValid
+} from 'date-fns';
+import { format, parse } from '../util/date.js';
 import Button from './Button';
 import ButtonGroup from './ButtonGroup';
 import Calendar from './Calendar';
@@ -18,16 +19,14 @@ import InputGroup from './InputGroup';
 import InputGroupAddon from './InputGroupAddon';
 import DropdownToggle from './DropdownToggle';
 
-const { parse } = Fecha;
-
 /**
  * Given a defaultValue, return the corresponding calendar date and input string value:
  *
  * | defaultValue   | date  | string         |
  * |----------------|-------|----------------|
  * | null,          | today | ''             |
- * | Date           | Date  | 'M/D/YYYY'     |
- * | 'M/D/YYYY'     | Date  | 'M/D/YYYY'     |
+ * | Date           | Date  | 'M/d/yyyy'     |
+ * | 'M/d/yyyy'     | Date  | 'M/d/yyyy'     |
  * | invalid string | today | invalid string |
  */
 function parseValue(defaultValue, dateFormat, parseDate) {
@@ -85,7 +84,7 @@ export default class DateInput extends React.Component {
 
   static defaultProps = {
     className: '',
-    dateFormat: 'M/D/YYYY',
+    dateFormat: 'M/d/yyyy',
     dateEnabled: () => true,
     dateVisible: () => true,
     disabled: false,
@@ -314,7 +313,7 @@ export default class DateInput extends React.Component {
                 </ButtonGroup>
 
                 <span className="m-auto">
-                  {format(date, 'MMMM YYYY')}
+                  {format(date, 'MMMM yyyy')}
                 </span>
 
                 <ButtonGroup size="sm">

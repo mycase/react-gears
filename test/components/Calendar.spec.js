@@ -2,11 +2,13 @@ import React from 'react';
 import assert from 'assert';
 import { mount } from 'enzyme';
 import sinon from 'sinon';
-import addWeeks from 'date-fns/add_weeks';
-import endOfWeek from 'date-fns/end_of_week';
-import isSameDay from 'date-fns/is_same_day';
-import startOfMonth from 'date-fns/start_of_month';
-import startOfWeek from 'date-fns/start_of_week';
+import {
+  addWeeks,
+  endOfWeek,
+  isSameDay,
+  startOfMonth,
+  startOfWeek
+} from 'date-fns';
 import { assertAccessible } from '../a11yHelpers';
 import { Calendar } from '../../src';
 

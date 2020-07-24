@@ -1,18 +1,20 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import classnames from 'classnames';
-import addWeeks from 'date-fns/add_weeks';
-import eachDay from 'date-fns/each_day';
-import endOfWeek from 'date-fns/end_of_week';
-import format from 'date-fns/format';
-import isFuture from 'date-fns/is_future';
-import isPast from 'date-fns/is_past';
-import isSameDay from 'date-fns/is_same_day';
-import isSameMonth from 'date-fns/is_same_month';
-import isToday from 'date-fns/is_today';
-import startOfDay from 'date-fns/start_of_day';
-import startOfMonth from 'date-fns/start_of_month';
-import startOfWeek from 'date-fns/start_of_week';
+import {
+  addWeeks,
+  eachDayOfInterval,
+  endOfWeek,
+  isFuture,
+  isPast,
+  isSameDay,
+  isSameMonth,
+  isToday,
+  startOfDay,
+  startOfMonth,
+  startOfWeek,
+} from 'date-fns';
+import { format } from '../util/date.js';
 import Table from './Table';
 
 // TODO locale/localize
@@ -78,7 +80,7 @@ class Calendar extends React.Component {
   static defaultProps = {
     className: '',
     date: new Date(),
-    dateFormat: 'D',
+    dateFormat: 'd',
     dateEnabled: () => true,
     dateVisible: () => true,
     renderDay: (day, dateFormat, onSelect) => (
@@ -100,7 +102,7 @@ class Calendar extends React.Component {
     const end = endOfWeek(addWeeks(start, 5));
 
     // Generate calendar days:
-    return eachDay(start, end).map((date) => {
+    return eachDayOfInterval({ start, end }).map((date) => {
       return {
         selected: isSameDay(currentDate, date),
         date: startOfDay(date),
