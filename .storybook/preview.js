@@ -1,4 +1,5 @@
 import React from 'react';
+import { withPropsTable } from 'storybook-addon-react-docgen';
 import {
   Col,
   Container,
@@ -31,6 +32,7 @@ const ThemeLink = ({ children, url }) => (
 );
 
 export const decorators = [
+  withPropsTable,
   (Story, info) => (
     <div>
       <Navbar color="light">
